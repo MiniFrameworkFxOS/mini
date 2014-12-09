@@ -1,0 +1,224 @@
+/* ----------------------------------
+ * Lists
+ * ---------------------------------- */
+
+[data-type="list"] {
+  font-weight: 400;
+  padding: 0 1.5rem;
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  strong {
+    font-weight: 500;
+  }
+  header {
+    padding: 0 1.5rem;
+    margin: 0;
+    font-size: 1.6rem;
+    height: 3rem;
+    line-height: 4rem;
+    font-weight: normal;
+    color: #ff4e00;
+    text-transform: uppercase;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  li {
+    width: 100%;
+    height: 6rem;
+    box-sizing: border-box;
+    border-bottom: solid 0.1rem #e7e7e7;
+    color: #333;
+    margin: 0;
+    display: block;
+    position: relative;
+    &:last-child {
+      border: none;
+    }
+  }
+}
+
+/* Title divisors */
+
+/* List items */
+
+/* Pressed State */
+
+li a:active {
+  background-color: transparent;
+  /* remove default color for active state */
+}
+
+[data-type="list"] {
+  li > a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    height: 6rem;
+    position: relative;
+    border: none;
+    outline: none;
+  }
+  &.active li:after, li > a:after {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    left: -1.5rem;
+    top: 0;
+    right: -1.5rem;
+    bottom: 0;
+  }
+  &.active li:active:after {
+    background-color: rgba(0, 213, 255, 0.3);
+  }
+  li {
+    > a:active:after {
+      background-color: rgba(0, 213, 255, 0.3);
+    }
+    &[aria-disabled="true"] {
+      pointer-events: none;
+      opacity: 0.2;
+      border-color: #888;
+    }
+  }
+  aside {
+    float: left;
+    margin: 0;
+    -moz-margin-end: 0.5rem;
+    height: 100%;
+    position: relative;
+  }
+  li > a aside {
+    background-color: transparent;
+    &.icon {
+      background-color: transparent;
+    }
+  }
+  aside {
+    &.pack-end {
+      float: right;
+      margin: 0;
+      -moz-margin-start: 0.5rem;
+      text-align: end;
+    }
+    &.icon {
+      width: 3rem;
+      height: 6rem;
+      background: white no-repeat left center / 100% auto;
+      font-size: 0;
+      display: block;
+      overflow: hidden;
+    }
+    span[data-type=img], img {
+      display: block;
+      overflow: hidden;
+      width: 5rem;
+      height: 5rem;
+      border-radius: 2.5rem;
+      margin-top: 0.5rem;
+      box-sizing: border-box;
+      background: transparent center center / cover;
+      position: relative;
+      /* Favor performance over quality */
+      image-rendering: -moz-crisp-edges;
+    }
+  }
+  [data-icon] {
+    font-size: 0;
+    &:before {
+      line-height: 6rem;
+      text-align: center;
+      width: 3rem;
+      color: #333;
+    }
+  }
+  li {
+    p {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      border: none;
+      display: block;
+      margin: 0;
+      color: #858585;
+      font-size: 1.5rem;
+      line-height: 2rem;
+      &:first-of-type {
+        font-size: 1.8rem;
+        line-height: 2.2rem;
+        color: #333;
+        padding: 1rem 0 0;
+      }
+      &:only-child, &:first-of-type:last-of-type {
+        line-height: 4rem;
+      }
+      em {
+        font-size: 1.5rem;
+        font-style: normal;
+      }
+      time {
+        -moz-margin-end: 0.3rem;
+        text-transform: uppercase;
+      }
+    }
+    > {
+      .pack-checkbox, .pack-radio, .pack-switch {
+        pointer-events: none;
+        position: absolute;
+        top: -0.1rem;
+        bottom: 0;
+        /* Intentionally adding a conflict between right/left here: this will be
+         * resolved differently whether we're in LTR or RTL mode. */
+        right: -4rem;
+        left: -4rem;
+        width: calc(100% + 4rem);
+        height: auto;
+      }
+      .pack-checkbox input ~ span:after, .pack-radio input ~ span:after, .pack-switch input ~ span:after {
+        /* because width is set in switches.css, the conflict between left/right will
+         * be resolved in favor of "left" in LTR and "right" in RTL */
+        left: 0;
+        right: 0;
+        -moz-margin-start: 0;
+      }
+    }
+  }
+  [data-type="edit"] {
+    li {
+      -moz-padding-start: 4rem;
+      > {
+        .pack-checkbox, .pack-radio, .pack-switch {
+          pointer-events: auto;
+          left: 0;
+          right: 0;
+        }
+        a {
+          pointer-events: none;
+          &:active:after, &:hover:after {
+            display: none;
+          }
+        }
+      }
+    }
+    aside.pack-end {
+      display: none;
+    }
+  }
+}
+
+.skin-comms [data-type="list"] header {
+  color: #4997a7;
+}
+
+/* RTL View */
+
+html[dir="rtl"] [data-type="list"] aside {
+  float: right;
+  &.pack-end {
+    float: left;
+  }
+}
